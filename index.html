@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .error__message {
+            color: red;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="result__block">
+        <h1 id='result'></h1>
+    </div>
+    <div class="calculator">
+        <input type="text" name="calculator" id="calculator" readonly><br><br><br>
+        <input type="button" id="one" value="1" onclick="calc(this.value)">
+        <input type="button" id="two" value="2" onclick="calc(this.value)">
+        <input type="button" id="three" value="3" onclick="calc(this.value)"><br>
+        <input type="button" id="four" value="4" onclick="calc(this.value)">
+        <input type="button" id="five" value="5" onclick="calc(this.value)">
+        <input type="button" id="six" value="6" onclick="calc(this.value)"><br>
+        <input type="button" id="seven" value="7" onclick="calc(this.value)">
+        <input type="button" id="eight" value="8" onclick="calc(this.value)">
+        <input type="button" id="nine" value="9" onclick="calc(this.value)"><br>
+        <input type="button" id="zero" value="0" onclick="calc(this.value)">
+    </div>
+    <div class="symb">
+        <input type="button" id="plus" value="+" onclick="symb(this.value)">
+        <input type="button" id="minus" value="-" onclick="symb(this.value)">
+    </div>
+    <p class='error__message' id='error'></p>
+</body>
+<script>
+    var symbol;
+    var number_one;
+    var number_two;
+    function calc(number) {
+        document.getElementById('error').textContent = "";
+        if (number_one == undefined) {
+            number_one = number;
+            document.getElementById('calculator').value += number
+        }
+        else if (symbol==undefined) {
+            document.getElementById('error').textContent = "Сперва выберите символ";
+        }
+        else{
+            document.getElementById('calculator').value += number
+            number_two = number
+            if(symbol == "+") {
+                let result = Number(number_one) + Number(number_two)
+                document.getElementById('result').textContent = result
+                document.getElementById('calculator').value = ""
+                number_one = undefined
+                number_two = undefined
+                symbol = undefined
+            }else {
+                let result = Number(number_one) - Number(number_two)
+                document.getElementById('result').textContent = result
+                document.getElementById('calculator').value = ""
+                number_one = undefined
+                number_two = undefined
+                symbol = undefined
+            }
+        }
+    }
+
+    function symb(sumb) {
+        document.getElementById('error').textContent = ''
+        if(number_one == undefined) {
+            document.getElementById('error').textContent = "Сперва введите число!";
+        }
+        else if(symbol != undefined) {
+            document.getElementById('error').textContent = "Символ уже выбран!";
+        } else {
+            document.getElementById('calculator').value += sumb
+            symbol = sumb;
+        }
+    }
+</script>
+</html>
